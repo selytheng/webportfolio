@@ -13,7 +13,7 @@
                 src="../assets/img/profile.jpg"
                 alt="Profile"
                 class="w-full h-full object-cover"
-                @error="handleImageError"
+                @error="onError"
               />
             </div>
             <div class="text-xl font-bold text-gray-800 dark:text-white">SE LyTheng</div>
@@ -44,7 +44,6 @@
       </div>
     </nav>
 
-    <!-- Mobile Menu - Floating Card -->
     <div
       v-show="isMenuOpen"
       class="md:hidden absolute top-20 right-4 bg-white/60 dark:bg-gray-950/50 backdrop-blur-md rounded-2xl shadow-lg p-2 min-w-[200px] border border-gray-200/20 dark:border-gray-800/20"
@@ -124,20 +123,15 @@ export default defineComponent({
       }
     }
 
-    const handleImageError = (event: Event) => {
-      const target = event.target as HTMLImageElement
-      target.onerror = null // Prevent infinite loop
-      target.src =
-        "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2'/%3E%3Ccircle cx='12' cy='7' r='4'/%3E%3C/svg%3E"
-    }
-
     onMounted(() => {
-      window.addEventListener('scroll', throttle(checkActiveSection, 100))
+      const throttledCheck = throttle(checkActiveSection, 100)
+      window.addEventListener('scroll', throttledCheck)
       checkActiveSection()
     })
 
     onUnmounted(() => {
-      window.removeEventListener('scroll', throttle(checkActiveSection, 100))
+      const throttledCheck = throttle(checkActiveSection, 100)
+      window.removeEventListener('scroll', throttledCheck)
     })
 
     return {
@@ -147,7 +141,6 @@ export default defineComponent({
       toggleMenu,
       closeMenu,
       scrollToSection,
-      handleImageError,
     }
   },
 })
