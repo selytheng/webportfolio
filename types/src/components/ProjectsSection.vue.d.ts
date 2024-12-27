@@ -1,0 +1,7 @@
+import type { Project } from '@/types/types';
+declare const _default: import("vue").DefineComponent<{}, {
+    currentCategory: import("vue").Ref<string, string>;
+    categories: string[];
+    filteredProjects: import("vue").ComputedRef<Project[]>;
+}, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, import("vue").PublicProps, Readonly<{}> & Readonly<{}>, {}, {}, {}, {}, string, import("vue").ComponentProvideOptions, true, {}, any>;
+export default _default;
