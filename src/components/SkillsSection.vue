@@ -5,17 +5,16 @@
         Technical Skills
       </h2>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        <div v-for="(skill, index) in skills"
-             :key="index"
-             class="bg-gray-50 dark:bg-gray-900 p-6 rounded-lg shadow-lg hover:shadow-xl
-                    transition-all duration-300">
+        <div
+          v-for="(skill, index) in skills"
+          :key="index"
+          class="bg-gray-50 dark:bg-gray-900 p-6 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300"
+        >
           <h3 class="text-xl font-semibold mb-4 text-gray-800 dark:text-white">
             {{ skill.category }}
           </h3>
           <ul class="space-y-3">
-            <li v-for="item in skill.items"
-                :key="item"
-                class="flex items-start">
+            <li v-for="item in skill.items" :key="item" class="flex items-start">
               <i class="fas fa-check-circle text-primary dark:text-blue-400 mt-1 mr-3"></i>
               <span class="text-gray-700 dark:text-gray-300">{{ item }}</span>
             </li>
@@ -41,8 +40,8 @@ export default defineComponent({
             'Manual Penetration Testing (NMAP, DIRB, AMASS)',
             'Automated Testing (Acunetix, Arachni, ZAP, Nessus)',
             'Vulnerability Scanning',
-            'Ethical Hacking'
-          ]
+            'Ethical Hacking',
+          ],
         },
         {
           category: 'System Administration',
@@ -50,21 +49,20 @@ export default defineComponent({
             'Linux (Debian, Ubuntu, Fedora, Kali, RHEL)',
             'Virtual Machine Management',
             'Docker Containerization',
-            'Cloud Services (AWS, Google Cloud)'
-          ]
+            'Cloud Services (AWS, Google Cloud)',
+          ],
         },
         {
           category: 'Development',
           items: [
             'Python Scripting',
-            'Laravel Backend Development',
+            'Website Development (Laravel, REACT, VUE)',
             'Version Control (Git)',
-            'CI/CD (Jenkins)'
-          ]
-        }
-      ] as Skill[]
+            'CI/CD (Jenkins)',
+          ],
+        },
+      ] as Skill[],
     }
-  }
+  },
 })
 </script>
-

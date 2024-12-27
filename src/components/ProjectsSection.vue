@@ -13,7 +13,7 @@
             'px-4 py-2 rounded-full transition-colors duration-300',
             currentCategory === cat
               ? 'bg-primary dark:bg-blue-600 text-white'
-              : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600'
+              : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600',
           ]"
         >
           {{ cat }}
@@ -28,11 +28,7 @@
           class="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300"
         >
           <!-- Project Image -->
-          <img
-            :src="project.image"
-            :alt="project.title"
-            class="w-full h-48 object-cover"
-          />
+          <img :src="project.image" :alt="project.title" class="w-full h-48 object-cover" />
 
           <!-- Project Content -->
           <div class="p-6">
@@ -83,88 +79,91 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, computed } from 'vue';
-import type { Project } from '@/types/types';
+import { defineComponent, ref, computed } from 'vue'
+import type { Project } from '@/types/types'
 
 export default defineComponent({
   name: 'ProjectsSection',
   setup() {
-    const currentCategory = ref('All');
-    const categories = ['All', 'Web', 'Security', 'Infrastructure'];
+    const currentCategory = ref('All')
+    const categories = ['All', 'Web', 'Security', 'Infrastructure']
 
     const projects: Project[] = [
       {
         title: 'Login Authentication App',
-        description: 'Secure login system with JWT authentication, role-based access control, and password hashing.',
-        image: '/api/placeholder/600/400',
-        githubLink: 'https://github.com/yourusername/login-app',
-        hostLink: 'https://login-app.example.com',
+        description:
+          'Secure login system with JWT authentication, role-based access control, and password hashing.',
+        image: './src/assets/img/loginapp.jpg',
+        githubLink: 'https://github.com/selytheng/login-app',
+        hostLink: 'https://login-app.gic-itc.top',
         frameworks: ['Vue.js', 'Node.js', 'MongoDB'],
-        category: 'web'
+        category: 'web',
       },
       {
         title: 'POS System',
-        description: 'Point of Sale system with inventory management, sales tracking, and receipt generation.',
-        image: '/api/placeholder/600/400',
-        githubLink: 'https://github.com/yourusername/pos-system',
-        hostLink: 'https://pos.example.com',
+        description:
+          'Point of Sale system with inventory management, sales tracking, and receipt generation.',
+        image: './src/assets/img/pos.jpg',
+        githubLink: 'https://github.com/selytheng/pos-itc',
+        hostLink: 'https://pos.gic-itc.top',
         frameworks: ['Vue.js', 'Laravel', 'MySQL'],
-        category: 'web'
+        category: 'web',
       },
       {
         title: 'Web Vulnerability Scanner',
-        description: 'Automated security testing tool for detecting common web vulnerabilities and generating detailed reports.',
-        image: '/api/placeholder/600/400',
-        githubLink: 'https://github.com/yourusername/vuln-scanner',
+        description:
+          'Automated security testing tool for detecting common web vulnerabilities and generating detailed reports.',
+        image: './src/assets/img/webvulscan.jpg',
+        githubLink: 'https://github.com/selytheng/ web-vulnerability-scanner',
         frameworks: ['Python', 'SQLite', 'Docker'],
-        category: 'security'
+        category: 'security',
       },
       {
         title: 'Google Cloud Hosting Setup',
-        description: 'Deployment architecture and configuration for scalable applications on Google Cloud Platform.',
-        image: '/api/placeholder/600/400',
-        githubLink: 'https://github.com/yourusername/gcp-setup',
+        description:
+          'Deployment architecture and configuration for scalable applications on Google Cloud Platform.',
+        image: './src/assets/img/googlecloud.jpg',
         frameworks: ['GCP', 'Terraform', 'Docker'],
-        category: 'infrastructure'
+        category: 'infrastructure',
       },
       {
         title: 'AWS Infrastructure',
-        description: 'AWS cloud infrastructure setup with auto-scaling, load balancing, and security configurations.',
-        image: '/api/placeholder/600/400',
-        githubLink: 'https://github.com/yourusername/aws-infra',
+        description:
+          'AWS cloud infrastructure setup with auto-scaling, load balancing, and security configurations.',
+        image: './src/assets/img/aws.jpg',
         frameworks: ['AWS', 'CloudFormation', 'Docker'],
-        category: 'infrastructure'
+        category: 'infrastructure',
       },
       {
         title: 'Proxy Server Implementation',
-        description: 'High-performance proxy server with caching, load balancing, and security features.',
-        image: '/api/placeholder/600/400',
-        githubLink: 'https://github.com/yourusername/proxy-server',
+        description:
+          'High-performance proxy server with caching, load balancing, and security features.',
+        image: './src/assets/img/proxy.webp',
         frameworks: ['Node.js', 'Redis', 'NGINX'],
-        category: 'infrastructure'
+        category: 'infrastructure',
       },
       {
         title: 'Network Infrastructure Design',
-        description: 'Comprehensive network architecture design with security zones, VLANs, and redundancy.',
-        image: '/api/placeholder/600/400',
-        githubLink: 'https://github.com/yourusername/network-design',
+        description:
+          'Comprehensive network architecture design with security zones, VLANs, and redundancy.',
+        image: './src/assets/img/netinf.jpg',
         frameworks: ['Cisco', 'Wireshark', 'pfSense'],
-        category: 'infrastructure'
-      }
-    ];
+        category: 'infrastructure',
+      },
+    ]
 
     const filteredProjects = computed(() => {
-      if (currentCategory.value === 'All') return projects;
+      if (currentCategory.value === 'All') return projects
       return projects.filter(
-        project => project.category.toLowerCase() === currentCategory.value.toLowerCase()
-      );
-    });
+        (project) => project.category.toLowerCase() === currentCategory.value.toLowerCase(),
+      )
+    })
 
     return {
       currentCategory,
       categories,
-      filteredProjects
-    };
-  }
-});
+      filteredProjects,
+    }
+  },
+})
 </script>
