@@ -80,7 +80,26 @@
 
 <script lang="ts">
 import { defineComponent, ref, computed } from 'vue'
-import type { Project } from '@/types/types'
+
+// Importing images for proper resolution
+import loginAppImage from '@/assets/img/loginapp.jpg'
+import posImage from '@/assets/img/pos.jpg'
+import webVulScanImage from '@/assets/img/webvulscan.jpg'
+import googleCloudImage from '@/assets/img/googlecloud.jpg'
+import awsImage from '@/assets/img/aws.jpg'
+import proxyImage from '@/assets/img/proxy.webp'
+import netInfImage from '@/assets/img/netinf.jpg'
+
+// Define Project type
+interface Project {
+  title: string
+  description: string
+  image: string
+  githubLink?: string
+  hostLink?: string
+  frameworks: string[]
+  category: string
+}
 
 export default defineComponent({
   name: 'ProjectsSection',
@@ -88,12 +107,13 @@ export default defineComponent({
     const currentCategory = ref('All')
     const categories = ['All', 'Web', 'Security', 'Infrastructure']
 
+    // Projects Array
     const projects: Project[] = [
       {
         title: 'Login Authentication App',
         description:
           'Secure login system with JWT authentication, role-based access control, and password hashing.',
-        image: './src/assets/img/loginapp.jpg',
+        image: loginAppImage,
         githubLink: 'https://github.com/selytheng/login-app',
         hostLink: 'https://login-app.gic-itc.top',
         frameworks: ['Vue.js', 'Node.js', 'MongoDB'],
@@ -103,7 +123,7 @@ export default defineComponent({
         title: 'POS System',
         description:
           'Point of Sale system with inventory management, sales tracking, and receipt generation.',
-        image: './src/assets/img/pos.jpg',
+        image: posImage,
         githubLink: 'https://github.com/selytheng/pos-itc',
         hostLink: 'https://pos.gic-itc.top',
         frameworks: ['Vue.js', 'Laravel', 'MySQL'],
@@ -113,8 +133,8 @@ export default defineComponent({
         title: 'Web Vulnerability Scanner',
         description:
           'Automated security testing tool for detecting common web vulnerabilities and generating detailed reports.',
-        image: './src/assets/img/webvulscan.jpg',
-        githubLink: 'https://github.com/selytheng/ web-vulnerability-scanner',
+        image: webVulScanImage,
+        githubLink: 'https://github.com/selytheng/web-vulnerability-scanner',
         frameworks: ['Python', 'SQLite', 'Docker'],
         category: 'security',
       },
@@ -122,7 +142,7 @@ export default defineComponent({
         title: 'Google Cloud Hosting Setup',
         description:
           'Deployment architecture and configuration for scalable applications on Google Cloud Platform.',
-        image: './src/assets/img/googlecloud.jpg',
+        image: googleCloudImage,
         frameworks: ['GCP', 'Terraform', 'Docker'],
         category: 'infrastructure',
       },
@@ -130,7 +150,7 @@ export default defineComponent({
         title: 'AWS Infrastructure',
         description:
           'AWS cloud infrastructure setup with auto-scaling, load balancing, and security configurations.',
-        image: './src/assets/img/aws.jpg',
+        image: awsImage,
         frameworks: ['AWS', 'CloudFormation', 'Docker'],
         category: 'infrastructure',
       },
@@ -138,7 +158,7 @@ export default defineComponent({
         title: 'Proxy Server Implementation',
         description:
           'High-performance proxy server with caching, load balancing, and security features.',
-        image: './src/assets/img/proxy.webp',
+        image: proxyImage,
         frameworks: ['Node.js', 'Redis', 'NGINX'],
         category: 'infrastructure',
       },
@@ -146,7 +166,7 @@ export default defineComponent({
         title: 'Network Infrastructure Design',
         description:
           'Comprehensive network architecture design with security zones, VLANs, and redundancy.',
-        image: './src/assets/img/netinf.jpg',
+        image: netInfImage,
         frameworks: ['Cisco', 'Wireshark', 'pfSense'],
         category: 'infrastructure',
       },
