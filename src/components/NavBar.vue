@@ -13,7 +13,7 @@
                 src="../assets/img/profile.jpg"
                 alt="Profile"
                 class="w-full h-full object-cover"
-                onError="this.onerror=null; this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'32\' height=\'32\' viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'%236b7280\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'%3E%3Cpath d=\'M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2\'/%3E%3Ccircle cx=\'12\' cy=\'7\' r=\'4\'/%3E%3C/svg%3E'"
+                @error="handleImageError"
               />
             </div>
             <div class="text-xl font-bold text-gray-800 dark:text-white">SE LyTheng</div>
@@ -98,6 +98,13 @@ export default defineComponent({
       closeMenu()
     }
 
+    const handleImageError = (event: Event) => {
+      const target = event.target as HTMLImageElement
+      target.onerror = null // Prevent infinite loop if fallback fails
+      target.src =
+        "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2'/%3E%3Ccircle cx='12' cy='7' r='4'/%3E%3C/svg%3E"
+    }
+
     const checkActiveSection = () => {
       const sections = navItems.map((item) => ({
         id: item.toLowerCase(),
@@ -143,6 +150,7 @@ export default defineComponent({
       closeMenu,
       scrollToSection,
       handleMenuClick,
+      handleImageError, // Add this method to the return object
     }
   },
 })
