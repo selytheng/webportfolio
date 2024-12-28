@@ -19,7 +19,7 @@
         <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
           <a
             href="#contact"
-            class="bg-primary hover:bg-blue-700 text-white px-8 py-3 rounded-lg text-center transition-colors duration-300"
+            class="bg-blue-500 dark:bg-blue-700 text-white hover:bg-blue-700 dark:hover:bg-blue-600 px-8 py-3 rounded-lg text-center transition-colors duration-300"
           >
             Contact Me
           </a>

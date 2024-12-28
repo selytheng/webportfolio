@@ -122,15 +122,15 @@ export default defineComponent({
       activeSection.value = currentSection ? currentSection.id : ''
     }
 
-    const throttle = (func: Function, limit: number) => {
-      let inThrottle: boolean
-      return function (this: any, ...args: any[]) {
+    const throttle = <T extends (...args: unknown[]) => void>(func: T, limit: number): T => {
+      let inThrottle = false
+      return function (this: unknown, ...args: Parameters<T>) {
         if (!inThrottle) {
           func.apply(this, args)
           inThrottle = true
           setTimeout(() => (inThrottle = false), limit)
         }
-      }
+      } as T
     }
 
     onMounted(() => {
