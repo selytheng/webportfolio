@@ -1,3 +1,5 @@
+import { FaEnvelope, FaPhone, FaMapMarkerAlt } from "react-icons/fa";
+
 export default function ContactSection() {
   return (
     <section
@@ -10,7 +12,7 @@ export default function ContactSection() {
           <div className="space-y-8">
             <div className="flex items-center group">
               <div className="w-12 h-12 bg-primary dark:bg-blue-600 rounded-full flex items-center justify-center mr-4">
-                <i className="fas fa-envelope text-lg"></i>
+                <FaEnvelope className="text-lg" />
               </div>
               <a
                 href="mailto:kh.lytheng@gmail.com"
@@ -22,7 +24,7 @@ export default function ContactSection() {
 
             <div className="flex items-center group">
               <div className="w-12 h-12 bg-primary dark:bg-blue-600 rounded-full flex items-center justify-center mr-4">
-                <i className="fas fa-phone text-lg"></i>
+                <FaPhone className="text-lg" />
               </div>
               <a
                 href="tel:+85510495062"
@@ -34,7 +36,7 @@ export default function ContactSection() {
 
             <div className="flex items-center group">
               <div className="w-12 h-12 bg-primary dark:bg-blue-600 rounded-full flex items-center justify-center mr-4">
-                <i className="fas fa-map-marker-alt text-lg"></i>
+                <FaMapMarkerAlt className="text-lg" />
               </div>
               <span>Phnom Penh, Cambodia</span>
             </div>

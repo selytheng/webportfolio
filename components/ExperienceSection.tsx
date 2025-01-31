@@ -1,4 +1,11 @@
-import { Experience } from "@/types/types";
+import { FaAngleRight } from "react-icons/fa";
+
+type Experience = {
+  title: string;
+  company: string;
+  period: string;
+  description: string[];
+};
 
 export default function ExperienceSection() {
   const experiences: Experience[] = [
@@ -40,12 +47,12 @@ export default function ExperienceSection() {
                   {exp.company} | {exp.period}
                 </p>
                 <ul className="space-y-2">
-                  {exp.description.map((detail) => (
+                  {exp.description.map((detail, idx) => (
                     <li
-                      key={detail}
+                      key={idx}
                       className="flex items-start text-gray-700 dark:text-gray-300"
                     >
-                      <i className="fas fa-angle-right text-primary dark:text-blue-400 mt-1 mr-2"></i>
+                      <FaAngleRight className="text-primary dark:text-blue-400 mt-1 mr-2" />
                       {detail}
                     </li>
                   ))}

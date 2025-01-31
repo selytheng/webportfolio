@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import { FaGithub, FaExternalLinkAlt } from "react-icons/fa"; // Importing icons for better performance
 import { Project } from "@/types/types";
 
 export default function ProjectsSection() {
@@ -99,6 +100,7 @@ export default function ProjectsSection() {
                   ? "bg-primary dark:bg-blue-600 text-white"
                   : "bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600"
               }`}
+              aria-label={`Filter projects by ${cat}`}
             >
               {cat}
             </button>
@@ -118,6 +120,7 @@ export default function ProjectsSection() {
                   alt={project.title}
                   fill
                   className="object-cover"
+                  priority={project.title === "Login Authentication App"} // Prioritize key images
                 />
               </div>
 
@@ -149,8 +152,9 @@ export default function ProjectsSection() {
                       target="_blank"
                       rel="noopener noreferrer"
                       className="flex items-center gap-2 text-primary dark:text-blue-400 hover:underline"
+                      aria-label={`View ${project.title} on GitHub`}
                     >
-                      <i className="fab fa-github"></i>
+                      <FaGithub />
                       GitHub
                     </a>
                   )}
@@ -160,8 +164,9 @@ export default function ProjectsSection() {
                       target="_blank"
                       rel="noopener noreferrer"
                       className="flex items-center gap-2 text-primary dark:text-blue-400 hover:underline"
+                      aria-label={`View live demo of ${project.title}`}
                     >
-                      <i className="fas fa-external-link-alt"></i>
+                      <FaExternalLinkAlt />
                       Live Demo
                     </a>
                   )}
