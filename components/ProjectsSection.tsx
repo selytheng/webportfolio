@@ -1,9 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useMemo } from "react"; // Add useMemo for optimization
 import Image from "next/image";
 import { FaGithub, FaExternalLinkAlt } from "react-icons/fa"; // Importing icons for better performance
 import { Project } from "@/types/types";
+import { motion } from "framer-motion"; // Import framer-motion for animations
 
 export default function ProjectsSection() {
   const [currentCategory, setCurrentCategory] = useState("All");
@@ -73,11 +74,30 @@ export default function ProjectsSection() {
     },
   ];
 
-  const filteredProjects = projects.filter((project) =>
-    currentCategory === "All"
-      ? true
-      : project.category.toLowerCase() === currentCategory.toLowerCase()
-  );
+  // Use useMemo to recalculate filteredProjects only when currentCategory changes
+  const filteredProjects = useMemo(() => {
+    return currentCategory === "All"
+      ? projects
+      : projects.filter(
+          (project) => project.category.toLowerCase() === currentCategory.toLowerCase()
+        );
+  }, [currentCategory, projects]);
+
+  // Animation variants for framer-motion
+  const cardVariants = {
+    hidden: { opacity: 0, y: 50 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+  };
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2, // Stagger animations for each child
+      },
+    },
+  };
 
   return (
     <section
@@ -90,9 +110,15 @@ export default function ProjectsSection() {
         </h2>
 
         {/* Project Categories */}
-        <div className="flex flex-wrap justify-center gap-4 mb-12">
+        <motion.div
+          className="flex flex-wrap justify-center gap-4 mb-12"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={containerVariants}
+        >
           {categories.map((cat) => (
-            <button
+            <motion.button
               key={cat}
               onClick={() => setCurrentCategory(cat)}
               className={`px-4 py-2 rounded-full transition-colors duration-300 ${
@@ -101,18 +127,25 @@ export default function ProjectsSection() {
                   : "bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600"
               }`}
               aria-label={`Filter projects by ${cat}`}
+              variants={cardVariants}
             >
               {cat}
-            </button>
+            </motion.button>
           ))}
-        </div>
+        </motion.div>
 
-        {/* Projects Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {/* Projects Grid with Motion Animations */}
+        <motion.div
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+          initial="hidden"
+          animate="visible" // Use animate instead of whileInView
+          variants={containerVariants}
+        >
           {filteredProjects.map((project) => (
-            <div
+            <motion.div
               key={project.title}
               className="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300"
+              variants={cardVariants}
             >
               <div className="relative h-48">
                 <Image
@@ -172,9 +205,9 @@ export default function ProjectsSection() {
                   )}
                 </div>
               </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

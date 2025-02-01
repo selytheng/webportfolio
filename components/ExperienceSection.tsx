@@ -1,3 +1,5 @@
+"use client";
+import { motion } from "framer-motion";
 import { FaAngleRight } from "react-icons/fa";
 
 type Experience = {
@@ -24,9 +26,13 @@ export default function ExperienceSection() {
   ];
 
   return (
-    <section
+    <motion.section
       id="experience"
       className="py-20 bg-gray-50 dark:bg-gray-900 transition-colors duration-300"
+      initial={{ opacity: 0, y: 100 }} // Start off-screen
+      whileInView={{ opacity: 1, y: 0 }} // Animate when visible
+      viewport={{ once: true, amount: 0.2 }} // Trigger when 20% in view
+      transition={{ duration: 0.8, ease: "easeOut" }} // Smooth transition
     >
       <div className="container mx-auto px-6">
         <h2 className="text-3xl font-bold mb-12 text-center text-gray-800 dark:text-white">
@@ -34,9 +40,13 @@ export default function ExperienceSection() {
         </h2>
         <div className="max-w-3xl mx-auto space-y-12">
           {experiences.map((exp, index) => (
-            <div
+            <motion.div
               key={index}
               className="relative pl-8 border-l-4 border-primary dark:border-blue-400"
+              initial={{ opacity: 0, scale: 0.9, x: -50 }}
+              whileInView={{ opacity: 1, scale: 1, x: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.6, delay: index * 0.2 }}
             >
               <div className="absolute -left-3 top-0 w-6 h-6 bg-primary dark:bg-blue-400 rounded-full"></div>
               <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg">
@@ -58,10 +68,10 @@ export default function ExperienceSection() {
                   ))}
                 </ul>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 }
