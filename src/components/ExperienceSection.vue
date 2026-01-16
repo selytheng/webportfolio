@@ -1,15 +1,17 @@
 <template>
   <section id="experience" class="py-20 bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
     <div class="container mx-auto px-6">
-      <h2 class="text-3xl font-bold mb-12 text-center text-gray-800 dark:text-white">
+      <h2 class="text-3xl font-bold mb-12 text-center text-gray-800 dark:text-white animate-fade-in-up">
         Experience
       </h2>
       <div class="max-w-3xl mx-auto space-y-12">
         <div v-for="(exp, index) in experiences"
              :key="index"
-             class="relative pl-8 border-l-4 border-primary dark:border-blue-400">
+             class="relative pl-8 border-l-4 border-primary dark:border-blue-400 animate-slide-in-left"
+             :style="{ animationDelay: `${index * 200}ms` }">
+          <div class="absolute -left-3 top-0 w-6 h-6 bg-primary dark:bg-blue-400 rounded-full animate-ping-slow"></div>
           <div class="absolute -left-3 top-0 w-6 h-6 bg-primary dark:bg-blue-400 rounded-full"></div>
-          <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg">
+          <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-1">
             <h3 class="text-xl font-semibold text-gray-800 dark:text-white">
               {{ exp.title }}
             </h3>
@@ -19,8 +21,8 @@
             <ul class="space-y-2">
               <li v-for="detail in exp.description"
                   :key="detail"
-                  class="flex items-start text-gray-700 dark:text-gray-300">
-                <i class="fas fa-angle-right text-primary dark:text-blue-400 mt-1 mr-2"></i>
+                  class="flex items-start text-gray-700 dark:text-gray-300 group">
+                <i class="fas fa-angle-right text-primary dark:text-blue-400 mt-1 mr-2 transform group-hover:translate-x-1 transition-transform duration-300"></i>
                 {{ detail }}
               </li>
             </ul>
@@ -57,3 +59,4 @@ export default defineComponent({
   }
 })
 </script>
+

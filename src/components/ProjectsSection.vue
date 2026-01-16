@@ -1,18 +1,18 @@
 <template>
   <section id="projects" class="py-20 bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
     <div class="container mx-auto px-6">
-      <h2 class="text-3xl font-bold mb-8 text-center text-gray-800 dark:text-white">Projects</h2>
+      <h2 class="text-3xl font-bold mb-8 text-center text-gray-800 dark:text-white animate-fade-in-up">Projects</h2>
 
       <!-- Project Categories -->
-      <div class="flex flex-wrap justify-center gap-4 mb-12">
+      <div class="flex flex-wrap justify-center gap-4 mb-12 animate-fade-in-up animation-delay-200">
         <button
           v-for="cat in categories"
           :key="cat"
           @click="currentCategory = cat"
           :class="[
-            'px-4 py-2 rounded-full transition-colors duration-300',
+            'px-4 py-2 rounded-full transition-all duration-300 transform hover:scale-110',
             currentCategory === cat
-              ? 'bg-primary dark:bg-blue-600 text-white'
+              ? 'bg-primary dark:bg-blue-600 text-white shadow-lg'
               : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600',
           ]"
         >
@@ -23,16 +23,20 @@
       <!-- Projects Grid -->
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         <div
-          v-for="project in filteredProjects"
+          v-for="(project, index) in filteredProjects"
           :key="project.title"
-          class="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300"
+          class="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 animate-fade-in-up group"
+          :style="{ animationDelay: `${index * 100}ms` }"
         >
           <!-- Project Image -->
-          <img :src="project.image" :alt="project.title" class="w-full h-48 object-cover" />
+          <div class="relative overflow-hidden">
+            <img :src="project.image" :alt="project.title" class="w-full h-48 object-cover transform group-hover:scale-110 transition-transform duration-700" />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+          </div>
 
           <!-- Project Content -->
           <div class="p-6">
-            <h3 class="text-xl font-semibold mb-2 text-gray-800 dark:text-white">
+            <h3 class="text-xl font-semibold mb-2 text-gray-800 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300">
               {{ project.title }}
             </h3>
             <p class="text-gray-600 dark:text-gray-300 mb-4">
@@ -44,7 +48,7 @@
               <span
                 v-for="framework in project.frameworks"
                 :key="framework"
-                class="px-3 py-1 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-full text-sm"
+                class="px-3 py-1 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-full text-sm hover:bg-blue-100 dark:hover:bg-blue-900 transition-colors duration-300"
               >
                 {{ framework }}
               </span>
@@ -56,7 +60,7 @@
                 v-if="project.githubLink"
                 :href="project.githubLink"
                 target="_blank"
-                class="flex items-center gap-2 text-primary dark:text-blue-400 hover:underline"
+                class="flex items-center gap-2 text-primary dark:text-blue-400 hover:underline transform hover:translate-x-1 transition-transform duration-300"
               >
                 <i class="fab fa-github"></i>
                 GitHub
@@ -65,7 +69,7 @@
                 v-if="project.hostLink"
                 :href="project.hostLink"
                 target="_blank"
-                class="flex items-center gap-2 text-primary dark:text-blue-400 hover:underline"
+                class="flex items-center gap-2 text-primary dark:text-blue-400 hover:underline transform hover:translate-x-1 transition-transform duration-300"
               >
                 <i class="fas fa-external-link-alt"></i>
                 Live Demo
@@ -81,7 +85,6 @@
 <script lang="ts">
 import { defineComponent, ref, computed } from 'vue'
 
-// Importing images for proper resolution
 import loginAppImage from '@/assets/img/loginapp.jpg'
 import posImage from '@/assets/img/pos.jpg'
 import webVulScanImage from '@/assets/img/webvulscan.jpg'
@@ -90,7 +93,6 @@ import awsImage from '@/assets/img/aws.jpg'
 import proxyImage from '@/assets/img/proxy.webp'
 import netInfImage from '@/assets/img/netinf.jpg'
 
-// Define Project type
 interface Project {
   title: string
   description: string
@@ -107,7 +109,6 @@ export default defineComponent({
     const currentCategory = ref('All')
     const categories = ['All', 'Web', 'Security', 'Infrastructure']
 
-    // Projects Array
     const projects: Project[] = [
       {
         title: 'Login Authentication App',
@@ -187,3 +188,4 @@ export default defineComponent({
   },
 })
 </script>
+
