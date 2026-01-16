@@ -2,10 +2,10 @@
   const contactMethods = [
     { icon: 'fas fa-envelope', label: 'Email', value: 'contact@selytheng.com', link: 'mailto:contact@selytheng.com', delay: '100ms' },
     { icon: 'fas fa-phone', label: 'Phone', value: '+855 12 495 062', link: 'tel:+85512495062', delay: '200ms' },
-    { icon: 'fab fa-github', label: 'GitHub', value: 'selytheng', link: 'https://github.com/selytheng', delay: '300ms' },
-    { icon: 'fab fa-linkedin', label: 'LinkedIn', value: 'Se LyTheng', link: 'https://linkedin.com/in/therealselytheng', delay: '400ms' },
+    { icon: 'fab fa-github', label: 'GitHub', value: '@selytheng', link: 'https://github.com/selytheng', delay: '300ms' },
+    { icon: 'fab fa-linkedin', label: 'LinkedIn', value: '@therealselytheng', link: 'https://linkedin.com/in/therealselytheng', delay: '400ms' },
     { icon: 'fab fa-telegram', label: 'Telegram', value: '@lytheng', link: 'https://t.me/lytheng', delay: '500ms' },
-    { icon: 'fas fa-map-marker-alt', label: 'Location', value: 'Phnom Penh, Cambodia', link: null, delay: '600ms' },
+    { icon: 'fas fa-map-marker-alt', label: 'Location', value: 'Phnom Penh, Cambodia', link: 'https://maps.app.goo.gl/GYDjt7GW3irirgCs5', delay: '600ms' },
   ];
 </script>
 
