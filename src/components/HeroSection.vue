@@ -68,7 +68,7 @@
 </template>
 
 <script setup lang="ts">
-const scrollToSection = (id) => {
+const scrollToSection = (id: string) => {
   const section = document.getElementById(id)
   if (section) {
     section.scrollIntoView({

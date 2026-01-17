@@ -1,11 +1,10 @@
 <template>
-  <div class="fixed w-full flex justify-center top-6 z-50 px-4">
+  <div class="fixed w-full flex flex-col items-center top-6 z-50 px-4 gap-4">
     <nav
       class="bg-white/60 dark:bg-gray-950/50 backdrop-blur-xl text-gray-700 dark:text-gray-200 rounded-full shadow-2xl transition-colors duration-300 border border-gray-200/20 dark:border-gray-800/20 max-w-5xl w-full"
     >
       <div class="px-6 py-3.5">
         <div class="flex items-center justify-between">
-          <!-- Logo Section -->
           <div class="flex items-center gap-3">
             <div
               class="w-9 h-9 rounded-full overflow-hidden bg-gradient-to-br from-blue-500/20 to-purple-500/20 dark:from-blue-500/30 dark:to-purple-500/30 backdrop-blur-xl border-2 border-white/40 dark:border-white/20 shadow-lg transform transition-transform duration-300 hover:scale-110"
@@ -22,7 +21,6 @@
             </div>
           </div>
 
-          <!-- Desktop Navigation -->
           <div class="hidden md:flex space-x-1 ml-6">
             <a
               v-for="item in navItems"
@@ -40,7 +38,6 @@
             </a>
           </div>
 
-          <!-- Mobile Menu Button -->
           <button
             @click="toggleMenu"
             class="md:hidden p-2.5 rounded-full hover:bg-white/80 dark:hover:bg-gray-800/60 transition-all duration-300 transform hover:scale-110 active:scale-95"
@@ -72,7 +69,16 @@
       </div>
     </nav>
 
-    <!-- Mobile Menu -->
+    <div class="animate-blink flex items-center gap-3 px-8 py-3 bg-red-600/10 border-2 border-red-500/30 backdrop-blur-xl rounded-2xl shadow-xl">
+      <span class="relative flex h-3 w-3">
+        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-500 opacity-75"></span>
+        <span class="relative inline-flex rounded-full h-3 w-3 bg-red-600"></span>
+      </span>
+      <span class="text-sm md:text-base font-black uppercase tracking-[0.2em] text-red-600 dark:text-red-400 drop-shadow-sm">
+        Under Maintaining
+      </span>
+    </div>
+
     <transition
       enter-active-class="transition-all duration-300 ease-out"
       leave-active-class="transition-all duration-200 ease-in"
@@ -194,12 +200,10 @@ export default defineComponent({
 </script>
 
 <style scoped>
-/* Smooth Scrolling */
 html {
   scroll-behavior: smooth;
 }
 
-/* Add subtle animation to the nav on mount */
 @keyframes slideDown {
   from {
     opacity: 0;
@@ -209,6 +213,15 @@ html {
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.7; transform: scale(1.02); }
+}
+
+.animate-blink {
+  animation: blink 1.5s ease-in-out infinite;
 }
 
 nav {
