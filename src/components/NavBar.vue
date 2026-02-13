@@ -5,6 +5,7 @@
     >
       <div class="px-6 py-3.5">
         <div class="flex items-center justify-between">
+          <!-- Logo + Name -->
           <div class="flex items-center gap-3">
             <div
               class="w-9 h-9 rounded-full overflow-hidden bg-gradient-to-br from-blue-500/20 to-purple-500/20 dark:from-blue-500/30 dark:to-purple-500/30 backdrop-blur-xl border-2 border-white/40 dark:border-white/20 shadow-lg transform transition-transform duration-300 hover:scale-110"
@@ -16,11 +17,15 @@
                 @error="handleImageError"
               />
             </div>
-            <div class="text-xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 dark:from-white dark:to-gray-300 bg-clip-text text-transparent">
+
+            <div
+              class="text-xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 dark:from-white dark:to-gray-300 bg-clip-text text-transparent"
+            >
               SE LyTheng
             </div>
           </div>
 
+          <!-- Desktop Menu -->
           <div class="hidden md:flex space-x-1 ml-6">
             <a
               v-for="item in navItems"
@@ -38,6 +43,7 @@
             </a>
           </div>
 
+          <!-- Mobile Button -->
           <button
             @click="toggleMenu"
             class="md:hidden p-2.5 rounded-full hover:bg-white/80 dark:hover:bg-gray-800/60 transition-all duration-300 transform hover:scale-110 active:scale-95"
@@ -69,16 +75,7 @@
       </div>
     </nav>
 
-    <div class="animate-blink flex items-center gap-3 px-8 py-3 bg-red-600/10 border-2 border-red-500/30 backdrop-blur-xl rounded-2xl shadow-xl">
-      <span class="relative flex h-3 w-3">
-        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-500 opacity-75"></span>
-        <span class="relative inline-flex rounded-full h-3 w-3 bg-red-600"></span>
-      </span>
-      <span class="text-sm md:text-base font-black uppercase tracking-[0.2em] text-red-600 dark:text-red-400 drop-shadow-sm">
-        Under Maintaining
-      </span>
-    </div>
-
+    <!-- Mobile Dropdown -->
     <transition
       enter-active-class="transition-all duration-300 ease-out"
       leave-active-class="transition-all duration-200 ease-in"
@@ -176,13 +173,15 @@ export default defineComponent({
       } as T
     }
 
+    const throttledScroll = throttle(checkActiveSection, 100)
+
     onMounted(() => {
-      window.addEventListener('scroll', throttle(checkActiveSection, 100))
+      window.addEventListener('scroll', throttledScroll)
       checkActiveSection()
     })
 
     onUnmounted(() => {
-      window.removeEventListener('scroll', throttle(checkActiveSection, 100))
+      window.removeEventListener('scroll', throttledScroll)
     })
 
     return {
@@ -213,15 +212,6 @@ html {
     opacity: 1;
     transform: translateY(0);
   }
-}
-
-@keyframes blink {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.7; transform: scale(1.02); }
-}
-
-.animate-blink {
-  animation: blink 1.5s ease-in-out infinite;
 }
 
 nav {
