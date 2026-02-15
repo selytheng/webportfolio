@@ -7,6 +7,7 @@
     <ExperienceSection />
     <ProjectsSection />
     <ContactSection />
+    <ScrollToTop />
   </div>
 </template>
 
@@ -14,6 +15,7 @@
 import { defineComponent } from 'vue'
 import NavBar from './components/NavBar.vue'
 import UnderMaintaining from './components/UnderMaintaining.vue'
+import ScrollToTop from './components/ScrollToTop.vue'
 import HeroSection from './components/HeroSection.vue'
 import SkillsSection from './components/SkillsSection.vue'
 import ExperienceSection from './components/ExperienceSection.vue'
@@ -30,6 +32,7 @@ export default defineComponent({
     ExperienceSection,
     ProjectsSection,
     ContactSection,
+    ScrollToTop,
   },
 })
 </script>
