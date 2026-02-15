@@ -5,9 +5,15 @@
   >
     <!-- Animated background -->
     <div class="absolute inset-0 opacity-10">
-      <div class="absolute top-10 left-10 w-72 h-72 bg-blue-500 rounded-full mix-blend-multiply filter blur-xl animate-blob"></div>
-      <div class="absolute top-0 right-10 w-72 h-72 bg-purple-500 rounded-full mix-blend-multiply filter blur-xl animate-blob animation-delay-2000"></div>
-      <div class="absolute bottom-10 left-20 w-72 h-72 bg-pink-500 rounded-full mix-blend-multiply filter blur-xl animate-blob animation-delay-4000"></div>
+      <div
+        class="absolute top-10 left-10 w-72 h-72 bg-blue-500 rounded-full mix-blend-multiply filter blur-xl animate-blob"
+      ></div>
+      <div
+        class="absolute top-0 right-10 w-72 h-72 bg-purple-500 rounded-full mix-blend-multiply filter blur-xl animate-blob animation-delay-2000"
+      ></div>
+      <div
+        class="absolute bottom-10 left-20 w-72 h-72 bg-pink-500 rounded-full mix-blend-multiply filter blur-xl animate-blob animation-delay-4000"
+      ></div>
     </div>
 
     <div
@@ -15,15 +21,15 @@
     >
       <!-- Text Content -->
       <div class="max-w-3xl text-center lg:text-left mt-8 lg:mt-0 animate-slide-in-left">
-        <h1 class="text-4xl md:text-5xl font-bold mb-6 animate-fade-in">
-          SE LyTheng
-        </h1>
+        <h1 class="text-4xl md:text-5xl font-bold mb-6 animate-fade-in">SE LyTheng</h1>
 
         <h2 class="text-3xl md:text-4xl font-semibold mb-4 animate-fade-in animation-delay-200">
           Cybersecurity & Network Infrastructure Specialist
         </h2>
 
-        <p class="text-lg md:text-xl mb-8 text-gray-600 dark:text-gray-300 animate-fade-in animation-delay-400">
+        <p
+          class="text-lg md:text-xl mb-8 text-gray-600 dark:text-gray-300 animate-fade-in animation-delay-400"
+        >
           A dedicated IT professional with expertise in cybersecurity, penetration testing, and
           system administration. Currently pursuing Computer Science at ITC.
         </p>

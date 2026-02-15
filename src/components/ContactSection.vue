@@ -1,79 +1,96 @@
 <script setup lang="ts">
-  const contactMethods = [
-    { icon: 'fas fa-envelope', label: 'Email', value: 'contact@selytheng.com', link: 'mailto:contact@selytheng.com', delay: '100ms' },
-    { icon: 'fas fa-phone', label: 'Phone', value: '+855 12 495 062', link: 'tel:+85512495062', delay: '200ms' },
-    { icon: 'fab fa-github', label: 'GitHub', value: '@selytheng', link: 'https://github.com/selytheng', delay: '300ms' },
-    { icon: 'fab fa-linkedin', label: 'LinkedIn', value: '@therealselytheng', link: 'https://linkedin.com/in/therealselytheng', delay: '400ms' },
-    { icon: 'fab fa-telegram', label: 'Telegram', value: '@lytheng', link: 'https://t.me/lytheng', delay: '500ms' },
-    { icon: 'fas fa-map-marker-alt', label: 'Location', value: 'Phnom Penh, Cambodia', link: 'https://maps.app.goo.gl/GYDjt7GW3irirgCs5', delay: '600ms' },
-  ];
+const contactMethods = [
+  {
+    icon: 'fas fa-envelope',
+    label: 'Email',
+    value: 'contact@selytheng.com',
+    link: 'mailto:contact@selytheng.com',
+  },
+  {
+    icon: 'fas fa-phone',
+    label: 'Phone',
+    value: '+855 12 495 062',
+    link: 'tel:+85512495062',
+  },
+  {
+    icon: 'fab fa-github',
+    label: 'GitHub',
+    value: '@selytheng',
+    link: 'https://github.com/selytheng',
+  },
+  {
+    icon: 'fab fa-linkedin',
+    label: 'LinkedIn',
+    value: '@therealselytheng',
+    link: 'https://linkedin.com/in/therealselytheng',
+  },
+  {
+    icon: 'fab fa-telegram',
+    label: 'Telegram',
+    value: '@lytheng',
+    link: 'https://t.me/lytheng',
+  },
+  {
+    icon: 'fas fa-map-marker-alt',
+    label: 'Location',
+    value: 'Phnom Penh, Cambodia',
+    link: 'https://maps.app.goo.gl/GYDjt7GW3irirgCs5',
+  },
+]
 </script>
 
 <template>
-  <section id="contact" class="py-24 bg-gray-900 dark:bg-gray-950 text-white relative overflow-hidden transition-colors duration-300">
-
-    <div class="absolute inset-0 opacity-5 pointer-events-none">
-      <div class="absolute top-20 right-10 w-96 h-96 bg-blue-500 rounded-full filter blur-3xl animate-blob"></div>
-      <div class="absolute bottom-20 left-10 w-96 h-96 bg-blue-600 rounded-full filter blur-3xl animate-blob animation-delay-2000"></div>
-    </div>
-
-    <div class="container mx-auto px-6 relative z-10">
+  <section id="contact" class="py-20 bg-white dark:bg-gray-900 transition-colors duration-300">
+    <div class="max-w-6xl mx-auto px-6">
+      <!-- Header -->
       <div class="text-center mb-16">
-        <h2 class="text-3xl font-bold mb-12 text-center text-gray-800 dark:text-white animate-fade-in-up">
-          Contact
-        </h2>
+        <span
+          class="inline-block px-4 py-1 text-sm font-semibold rounded-xl bg-blue-100 text-blue-600 dark:bg-blue-900/40 dark:text-blue-300 mb-4"
+        >
+          Get In Touch
+        </span>
+        <h2 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">Let's Connect</h2>
+        <p class="text-gray-600 dark:text-gray-400 max-w-xl mx-auto">
+          Feel free to reach out through any of these channels
+        </p>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
-        <div v-for="item in contactMethods" :key="item.label"
-              class="group p-6 rounded-xl bg-gray-800/50 border border-gray-700 hover:border-primary transition-all duration-300 animate-slide-in-up"
-              :style="{ animationDelay: item.delay }">
-
-          <div class="flex items-center space-x-4">
-            <div class="w-12 h-12 shrink-0 bg-primary dark:bg-blue-600 rounded-full flex items-center justify-center shadow-lg transform group-hover:scale-110 group-hover:rotate-12 transition-all duration-300">
-              <i :class="[item.icon, 'text-lg']"></i>
-            </div>
-
-            <div class="overflow-hidden">
-              <p class="text-xs font-semibold uppercase tracking-wider text-gray-400 mb-0.5">{{ item.label }}</p>
-              <component :is="item.link ? 'a' : 'span'"
-                          :href="item.link"
-                          class="text-lg font-medium truncate block transition-colors"
-                          :class="item.link ? 'hover:text-primary dark:hover:text-blue-400' : 'text-white'">
-                {{ item.value }}
-              </component>
-            </div>
+      <!-- Cards -->
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <a
+          v-for="item in contactMethods"
+          :key="item.label"
+          :href="item.link"
+          :target="item.link.startsWith('http') ? '_blank' : undefined"
+          :rel="item.link.startsWith('http') ? 'noopener noreferrer' : undefined"
+          class="flex items-center gap-4 p-6 rounded-3xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 hover:-translate-y-1 hover:shadow-md transition-all duration-200"
+        >
+          <!-- Icon -->
+          <div
+            class="w-12 h-12 flex items-center justify-center rounded-full bg-blue-100 dark:bg-blue-900/40"
+          >
+            <i :class="[item.icon, 'text-blue-600 dark:text-blue-400 text-lg']"></i>
           </div>
-        </div>
+
+          <!-- Text -->
+          <div class="flex-1">
+            <p class="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400">
+              {{ item.label }}
+            </p>
+            <p class="font-semibold text-gray-900 dark:text-white truncate">
+              {{ item.value }}
+            </p>
+          </div>
+
+          <!-- Arrow -->
+          <div class="text-gray-400 group-hover:text-blue-500 transition">→</div>
+        </a>
       </div>
 
-      <div class="mt-20 text-center text-gray-500 text-sm border-t border-gray-800 pt-8">
-        Copyright © 2026 <span class="text-gray-400">Se LyTheng</span>. All rights reserved.
+      <!-- Footer -->
+      <div class="mt-16 text-center text-sm text-gray-500 dark:text-gray-400">
+        © 2026 Se LyTheng. All rights reserved.
       </div>
     </div>
   </section>
 </template>
-
-<style scoped>
-/* Keyframes kept from your original request */
-@keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(30px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes slideInUp {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes blob {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  33% { transform: translate(30px, -50px) scale(1.1); }
-  66% { transform: translate(-20px, 20px) scale(0.9); }
-}
-
-.animate-fade-in-up { animation: fadeInUp 0.8s ease-out forwards; }
-.animate-slide-in-up { animation: slideInUp 0.6s ease-out forwards; opacity: 0; }
-.animate-blob { animation: blob 7s infinite; }
-.animation-delay-2000 { animation-delay: 2s; }
-</style>

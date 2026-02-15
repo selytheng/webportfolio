@@ -1,83 +1,127 @@
 <template>
   <section id="projects" class="py-20 bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
     <div class="container mx-auto px-6">
-      <h2 class="text-3xl font-bold mb-8 text-center text-gray-800 dark:text-white animate-fade-in-up">Projects</h2>
+      <h2
+        class="text-3xl font-bold mb-8 text-center text-gray-800 dark:text-white animate-fade-in-up"
+      >
+        Projects
+      </h2>
 
-      <!-- Project Categories -->
-      <div class="flex flex-wrap justify-center gap-4 mb-12 animate-fade-in-up animation-delay-200">
+      <!-- Expand/Collapse Button -->
+      <div class="flex justify-center mb-12 animate-fade-in-up animation-delay-100">
         <button
-          v-for="cat in categories"
-          :key="cat"
-          @click="currentCategory = cat"
-          :class="[
-            'px-4 py-2 rounded-full transition-all duration-300 transform hover:scale-110',
-            currentCategory === cat
-              ? 'bg-primary dark:bg-blue-600 text-white shadow-lg'
-              : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600',
-          ]"
+          @click="isExpanded = !isExpanded"
+          class="px-6 py-3 rounded-full transition-all duration-300 transform hover:scale-110 bg-primary dark:bg-blue-600 text-white shadow-lg hover:shadow-xl flex items-center gap-3"
         >
-          {{ cat }}
+          <span class="font-semibold">{{
+            isExpanded ? 'Collapse Projects' : 'Expand Projects'
+          }}</span>
+          <svg
+            :class="['w-5 h-5 transition-transform duration-300', isExpanded ? 'rotate-180' : '']"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M19 9l-7 7-7-7"
+            />
+          </svg>
         </button>
       </div>
 
-      <!-- Projects Grid -->
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        <div
-          v-for="(project, index) in filteredProjects"
-          :key="project.title"
-          class="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 animate-fade-in-up group"
-          :style="{ animationDelay: `${index * 100}ms` }"
-        >
-          <!-- Project Image -->
-          <div class="relative overflow-hidden">
-            <img :src="project.image" :alt="project.title" class="w-full h-48 object-cover transform group-hover:scale-110 transition-transform duration-700" />
-            <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+      <!-- Expanded Content -->
+      <transition name="expand">
+        <div v-show="isExpanded" class="overflow-hidden">
+          <!-- Project Categories -->
+          <div
+            class="flex flex-wrap justify-center gap-4 mb-12 animate-fade-in-up animation-delay-200"
+          >
+            <button
+              v-for="cat in categories"
+              :key="cat"
+              @click="currentCategory = cat"
+              :class="[
+                'px-4 py-2 rounded-full transition-all duration-300 transform hover:scale-110',
+                currentCategory === cat
+                  ? 'bg-primary dark:bg-blue-600 text-white shadow-lg'
+                  : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600',
+              ]"
+            >
+              {{ cat }}
+            </button>
           </div>
 
-          <!-- Project Content -->
-          <div class="p-6">
-            <h3 class="text-xl font-semibold mb-2 text-gray-800 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300">
-              {{ project.title }}
-            </h3>
-            <p class="text-gray-600 dark:text-gray-300 mb-4">
-              {{ project.description }}
-            </p>
+          <!-- Projects Grid -->
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div
+              v-for="(project, index) in filteredProjects"
+              :key="project.title"
+              class="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 animate-fade-in-up group"
+              :style="{ animationDelay: `${index * 100}ms` }"
+            >
+              <!-- Project Image -->
+              <div class="relative overflow-hidden">
+                <img
+                  :src="project.image"
+                  :alt="project.title"
+                  class="w-full h-48 object-cover transform group-hover:scale-110 transition-transform duration-700"
+                />
+                <div
+                  class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                ></div>
+              </div>
 
-            <!-- Frameworks -->
-            <div class="flex flex-wrap gap-2 mb-4">
-              <span
-                v-for="framework in project.frameworks"
-                :key="framework"
-                class="px-3 py-1 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-full text-sm hover:bg-blue-100 dark:hover:bg-blue-900 transition-colors duration-300"
-              >
-                {{ framework }}
-              </span>
-            </div>
+              <!-- Project Content -->
+              <div class="p-6">
+                <h3
+                  class="text-xl font-semibold mb-2 text-gray-800 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300"
+                >
+                  {{ project.title }}
+                </h3>
+                <p class="text-gray-600 dark:text-gray-300 mb-4">
+                  {{ project.description }}
+                </p>
 
-            <!-- Links -->
-            <div class="flex gap-4">
-              <a
-                v-if="project.githubLink"
-                :href="project.githubLink"
-                target="_blank"
-                class="flex items-center gap-2 text-primary dark:text-blue-400 hover:underline transform hover:translate-x-1 transition-transform duration-300"
-              >
-                <i class="fab fa-github"></i>
-                GitHub
-              </a>
-              <a
-                v-if="project.hostLink"
-                :href="project.hostLink"
-                target="_blank"
-                class="flex items-center gap-2 text-primary dark:text-blue-400 hover:underline transform hover:translate-x-1 transition-transform duration-300"
-              >
-                <i class="fas fa-external-link-alt"></i>
-                Live Demo
-              </a>
+                <!-- Frameworks -->
+                <div class="flex flex-wrap gap-2 mb-4">
+                  <span
+                    v-for="framework in project.frameworks"
+                    :key="framework"
+                    class="px-3 py-1 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-full text-sm hover:bg-blue-100 dark:hover:bg-blue-900 transition-colors duration-300"
+                  >
+                    {{ framework }}
+                  </span>
+                </div>
+
+                <!-- Links -->
+                <div class="flex gap-4">
+                  <a
+                    v-if="project.githubLink"
+                    :href="project.githubLink"
+                    target="_blank"
+                    class="flex items-center gap-2 text-primary dark:text-blue-400 hover:underline transform hover:translate-x-1 transition-transform duration-300"
+                  >
+                    <i class="fab fa-github"></i>
+                    GitHub
+                  </a>
+                  <a
+                    v-if="project.hostLink"
+                    :href="project.hostLink"
+                    target="_blank"
+                    class="flex items-center gap-2 text-primary dark:text-blue-400 hover:underline transform hover:translate-x-1 transition-transform duration-300"
+                  >
+                    <i class="fas fa-external-link-alt"></i>
+                    Live Demo
+                  </a>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      </transition>
     </div>
   </section>
 </template>
@@ -106,6 +150,7 @@ interface Project {
 export default defineComponent({
   name: 'ProjectsSection',
   setup() {
+    const isExpanded = ref(false)
     const currentCategory = ref('All')
     const categories = ['All', 'Web', 'Security', 'Infrastructure']
 
@@ -118,7 +163,7 @@ export default defineComponent({
         githubLink: 'https://github.com/selytheng/login-app',
         hostLink: 'https://login-app.gic-itc.top',
         frameworks: ['Vue.js', 'Node.js', 'MongoDB'],
-        category: 'web',
+        category: 'Web',
       },
       {
         title: 'POS System',
@@ -128,7 +173,7 @@ export default defineComponent({
         githubLink: 'https://github.com/selytheng/pos-itc',
         hostLink: 'https://pos.gic-itc.top',
         frameworks: ['Vue.js', 'Laravel', 'MySQL'],
-        category: 'web',
+        category: 'Web',
       },
       {
         title: 'Web Vulnerability Scanner',
@@ -137,7 +182,7 @@ export default defineComponent({
         image: webVulScanImage,
         githubLink: 'https://github.com/selytheng/web-vulnerability-scanner',
         frameworks: ['Python', 'SQLite', 'Docker'],
-        category: 'security',
+        category: 'Security',
       },
       {
         title: 'Google Cloud Hosting Setup',
@@ -145,7 +190,7 @@ export default defineComponent({
           'Deployment architecture and configuration for scalable applications on Google Cloud Platform.',
         image: googleCloudImage,
         frameworks: ['GCP', 'Terraform', 'Docker'],
-        category: 'infrastructure',
+        category: 'Infrastructure',
       },
       {
         title: 'AWS Infrastructure',
@@ -153,7 +198,7 @@ export default defineComponent({
           'AWS cloud infrastructure setup with auto-scaling, load balancing, and security configurations.',
         image: awsImage,
         frameworks: ['AWS', 'CloudFormation', 'Docker'],
-        category: 'infrastructure',
+        category: 'Infrastructure',
       },
       {
         title: 'Proxy Server Implementation',
@@ -161,7 +206,7 @@ export default defineComponent({
           'High-performance proxy server with caching, load balancing, and security features.',
         image: proxyImage,
         frameworks: ['Node.js', 'Redis', 'NGINX'],
-        category: 'infrastructure',
+        category: 'Infrastructure',
       },
       {
         title: 'Network Infrastructure Design',
@@ -169,18 +214,17 @@ export default defineComponent({
           'Comprehensive network architecture design with security zones, VLANs, and redundancy.',
         image: netInfImage,
         frameworks: ['Cisco', 'Wireshark', 'pfSense'],
-        category: 'infrastructure',
+        category: 'Infrastructure',
       },
     ]
 
     const filteredProjects = computed(() => {
       if (currentCategory.value === 'All') return projects
-      return projects.filter(
-        (project) => project.category.toLowerCase() === currentCategory.value.toLowerCase(),
-      )
+      return projects.filter((project) => project.category === currentCategory.value)
     })
 
     return {
+      isExpanded,
       currentCategory,
       categories,
       filteredProjects,
@@ -189,3 +233,48 @@ export default defineComponent({
 })
 </script>
 
+<style scoped>
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.8s ease-out forwards;
+}
+
+.animation-delay-100 {
+  animation-delay: 100ms;
+}
+
+.animation-delay-200 {
+  animation-delay: 200ms;
+}
+
+/* Expand/Collapse Transition */
+.expand-enter-active,
+.expand-leave-active {
+  transition: all 0.5s ease;
+  max-height: 5000px;
+}
+
+.expand-enter-from,
+.expand-leave-to {
+  opacity: 0;
+  max-height: 0;
+  transform: translateY(-20px);
+}
+
+.expand-enter-to,
+.expand-leave-from {
+  opacity: 1;
+  max-height: 5000px;
+  transform: translateY(0);
+}
+</style>
